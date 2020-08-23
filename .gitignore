@@ -3,7 +3,6 @@
 *.iml
 *.ods
 *.yml
-*.json
 
 dependency-reduced-pom.xml
 
