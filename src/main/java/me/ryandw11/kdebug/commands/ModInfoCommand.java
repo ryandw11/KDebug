@@ -1,5 +1,6 @@
 package me.ryandw11.kdebug.commands;
 
+import me.ryandw11.kdebug.ColorUtil;
 import org.kakara.core.Kakara;
 import org.kakara.core.command.CommandSender;
 import org.kakara.core.mod.Mod;
@@ -21,7 +22,7 @@ public class ModInfoCommand extends org.kakara.core.mod.game.ModCommand {
             List<Mod> mods = Kakara.getModManager().getLoadedMods().stream().filter(m -> m.getName()
                     .equalsIgnoreCase(strings[0])).collect(Collectors.toList());
             if(mods.size() < 1){
-                commandSender.sendMessage("Error: Mod not found!");
+                commandSender.sendMessage(ColorUtil.RED + "Error: Mod not found!");
                 return;
             }
             Mod mod = mods.get(0);
@@ -31,7 +32,7 @@ public class ModInfoCommand extends org.kakara.core.mod.game.ModCommand {
             commandSender.sendMessage("Authors: " + String.join(", ", authors));
             commandSender.sendMessage("Mod Desc: " + desc);
         }else{
-            commandSender.sendMessage("Invalid Usage: /modinfo {mod}");
+            commandSender.sendMessage(ColorUtil.RED + "Invalid Usage: /modinfo {mod}");
         }
     }
 }

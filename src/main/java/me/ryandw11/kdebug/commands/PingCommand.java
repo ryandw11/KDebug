@@ -3,7 +3,6 @@ package me.ryandw11.kdebug.commands;
 import org.kakara.core.command.CommandSender;
 import org.kakara.core.mod.Mod;
 import org.kakara.core.mod.game.ModCommand;
-import org.kakara.core.server.Server;
 
 import java.util.Collections;
 

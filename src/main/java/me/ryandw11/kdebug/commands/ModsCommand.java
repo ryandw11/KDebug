@@ -1,5 +1,6 @@
 package me.ryandw11.kdebug.commands;
 
+import me.ryandw11.kdebug.ColorUtil;
 import org.kakara.core.Kakara;
 import org.kakara.core.command.Command;
 import org.kakara.core.command.CommandSender;
@@ -26,15 +27,15 @@ public class ModsCommand extends org.kakara.core.mod.game.ModCommand {
                 page = Integer.parseInt(strings[0]);
                 page--;
             }catch (NumberFormatException ex){
-                commandSender.sendMessage("Invalid page number!");
+                commandSender.sendMessage(ColorUtil.RED + "Invalid page number!");
                 return;
             }
             if(page < 0){
-                commandSender.sendMessage("Invalid page number!");
+                commandSender.sendMessage(ColorUtil.RED + "Invalid page number!");
                 return;
             }
             if(page * 5 > commandList.size()){
-                commandSender.sendMessage("Invalid page number!");
+                commandSender.sendMessage(ColorUtil.RED + "Invalid page number!");
                 return;
             }
         }

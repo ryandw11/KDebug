@@ -1,5 +1,6 @@
 package me.ryandw11.kdebug.commands;
 
+import me.ryandw11.kdebug.ColorUtil;
 import org.kakara.core.Kakara;
 import org.kakara.core.command.Command;
 import org.kakara.core.command.CommandSender;
@@ -23,12 +24,12 @@ public class ClearInvCommand extends ModCommand {
     @Override
     public void execute(String s, String[] strings, String s1, CommandSender commandSender) {
         if(!(commandSender instanceof Player)){
-            commandSender.sendMessage("This command is for players only!");
+            commandSender.sendMessage(ColorUtil.RED + "This command is for players only!");
             return;
         }
         Player p = (Player) commandSender;
         if(Kakara.getItemManager().getItem("KAKARA:AIR").isEmpty()){
-            commandSender.sendMessage("A fatal error has occurred!");
+            commandSender.sendMessage(ColorUtil.RED + "A fatal error has occurred!");
             Kakara.LOGGER.error("Error: Cannot find item KAKARA:AIR!");
             return;
         }

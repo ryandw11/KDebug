@@ -1,5 +1,6 @@
 package me.ryandw11.kdebug.commands;
 
+import me.ryandw11.kdebug.ColorUtil;
 import org.kakara.core.Kakara;
 import org.kakara.core.NameKey;
 import org.kakara.core.command.CommandSender;
@@ -20,7 +21,7 @@ public class GiveCommand extends ModCommand {
     @Override
     public void execute(String s, String[] strings, String s1, CommandSender commandSender) {
         if(!(commandSender instanceof Player)){
-            commandSender.sendMessage("This command can only be ran by players!");
+            commandSender.sendMessage(ColorUtil.RED + "This command can only be ran by players!");
             return;
         }
         Player p = (Player) commandSender;
@@ -29,11 +30,11 @@ public class GiveCommand extends ModCommand {
             try{
                 item =  Kakara.getItemManager().getItem(new NameKey(strings[0].toUpperCase()));
             }catch(IllegalArgumentException ex){
-                commandSender.sendMessage("Invalid item! (Be sure you formatted the item name as 'mod:item'!)");
+                commandSender.sendMessage(ColorUtil.RED + "Invalid item! (Be sure you formatted the item name as 'mod:item'!)");
                 return;
             }
             if(item.isEmpty()){
-                commandSender.sendMessage("Error: Invalid item!");
+                commandSender.sendMessage(ColorUtil.RED + "Error: Invalid item!");
                 return;
             }
             ItemStack stonk = Kakara.createItemStack(item.get());
@@ -44,25 +45,25 @@ public class GiveCommand extends ModCommand {
             try{
                 item =  Kakara.getItemManager().getItem(new NameKey(strings[0].toUpperCase()));
             }catch(IllegalArgumentException ex){
-                commandSender.sendMessage("Invalid item! (Be sure you formatted the item name as 'mod:item'!)");
+                commandSender.sendMessage(ColorUtil.RED + "Invalid item! (Be sure you formatted the item name as 'mod:item'!)");
                 return;
             }
             if(item.isEmpty()){
-                commandSender.sendMessage("Error: Invalid item!");
+                commandSender.sendMessage(ColorUtil.RED + "Error: Invalid item!");
                 return;
             }
             int count;
             try{
                 count = Integer.parseInt(strings[1]);
             }catch (NumberFormatException ex){
-                commandSender.sendMessage("Error: Invalid item count.");
+                commandSender.sendMessage(ColorUtil.RED + "Error: Invalid item count.");
                 return;
             }
             ItemStack stonk = Kakara.createItemStack(item.get());
             stonk.setCount(count);
             p.getInventory().addItemStack(stonk);
         }else{
-            commandSender.sendMessage("Invalid Usage. /give {item} [count]");
+            commandSender.sendMessage(ColorUtil.RED + "Invalid Usage. /give {item} [count]");
         }
 
     }
