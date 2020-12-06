@@ -14,9 +14,11 @@ import org.kakara.core.server.gui.ServerInventory;
 import java.util.Collections;
 
 public class ClearInvCommand extends ModCommand {
+    private ServerGameInstance serverGameInstance;
     public ClearInvCommand(Mod mod) {
         super(Collections.singleton("ci"), "Clear your inventory.", mod, "clearinv");
         KValidate.checkServer();
+        serverGameInstance = (ServerGameInstance) Kakara.getGameInstance();
     }
 
     @Override
@@ -26,14 +28,14 @@ public class ClearInvCommand extends ModCommand {
             return;
         }
         Player p = (Player) commandSender;
-        if (Kakara.getGameInstance().getItemManager().getItem(0) == null) {
+        if (serverGameInstance.getItemManager().getItem(0) == null) {
             commandSender.sendMessage(ColorUtil.RED + "A fatal error has occurred!");
             Kakara.LOGGER.error("Error: Cannot find item KAKARA:AIR!");
             return;
         }
-        Item air = Kakara.getGameInstance().getItemManager().getItem(0);
+        Item air = serverGameInstance.getItemManager().getItem(0);
         for (int i = 0; i < p.getInventory().getSize(); i++) {
-            ((ServerInventory) p.getInventory()).setItemStack(((ServerGameInstance) Kakara.getGameInstance()).createItemStack(air), i);
+            ((ServerInventory) p.getInventory()).setItemStack(serverGameInstance.createItemStack(air), i);
         }
     }
 }

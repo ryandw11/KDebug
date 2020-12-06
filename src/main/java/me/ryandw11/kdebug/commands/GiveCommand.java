@@ -20,9 +20,11 @@ import java.util.Collections;
 import java.util.Optional;
 
 public class GiveCommand extends ModCommand {
+    private ServerGameInstance gameInstance;
     public GiveCommand(Mod mod){
         super(Collections.singleton("item"), "Give yourself an item.", mod, "give");
         KValidate.checkServer();
+        this.gameInstance = (ServerGameInstance) Kakara.getGameInstance();
     }
 
     @Override
@@ -35,7 +37,7 @@ public class GiveCommand extends ModCommand {
         if(strings.length == 1){
             Item item;
             try{
-                item =  Kakara.getGameInstance().getItemManager().getItem(new ControllerKey(strings[0].toUpperCase()));
+                item =  gameInstance.getItemManager().getItem(new ControllerKey(strings[0].toUpperCase()));
             }catch(IllegalArgumentException ex){
                 commandSender.sendMessage(ColorUtil.RED + "Invalid item! (Be sure you formatted the item name as 'mod:item'!)");
                 return;
@@ -44,13 +46,13 @@ public class GiveCommand extends ModCommand {
                 commandSender.sendMessage(ColorUtil.RED + "Error: Invalid item!");
                 return;
             }
-            ServerItemStack stonk = ((ServerGameInstance) Kakara.getGameInstance()).createItemStack(item);
+            ServerItemStack stonk = gameInstance.createItemStack(item);
             stonk.setCount(100);
             ((ServerInventory) p.getInventory()).addItemStack(stonk);
         }else if(strings.length == 2){
             Item item;
             try{
-                item =  Kakara.getGameInstance().getItemManager().getItem(new ControllerKey(strings[0].toUpperCase()));
+                item =  gameInstance.getItemManager().getItem(new ControllerKey(strings[0].toUpperCase()));
             }catch(IllegalArgumentException ex){
                 commandSender.sendMessage(ColorUtil.RED + "Invalid item! (Be sure you formatted the item name as 'mod:item'!)");
                 return;
@@ -66,7 +68,7 @@ public class GiveCommand extends ModCommand {
                 commandSender.sendMessage(ColorUtil.RED + "Error: Invalid item count.");
                 return;
             }
-            ServerItemStack stonk = ((ServerGameInstance) Kakara.getGameInstance()).createItemStack(item);
+            ServerItemStack stonk = gameInstance.createItemStack(item);
             stonk.setCount(count);
             ((ServerInventory) p.getInventory()).addItemStack(stonk);
         }else{
