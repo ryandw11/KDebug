@@ -4,6 +4,7 @@ import me.ryandw11.kdebug.ColorUtil;
 import org.kakara.core.common.Kakara;
 import org.kakara.core.common.command.CommandSender;
 import org.kakara.core.common.mod.Mod;
+import org.kakara.core.common.mod.game.GameMod;
 import org.kakara.core.common.mod.game.ModCommand;
 
 
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ModsCommand extends ModCommand {
-    public ModsCommand(Mod mod){
+    public ModsCommand(GameMod mod){
         super(Collections.singleton("modlist"), "List the mods installed.", mod, "mods");
     }
 

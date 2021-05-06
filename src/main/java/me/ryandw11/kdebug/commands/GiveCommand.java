@@ -9,6 +9,7 @@ import org.kakara.core.common.command.CommandSender;
 import org.kakara.core.common.game.Item;
 import org.kakara.core.common.game.ItemStack;
 import org.kakara.core.common.mod.Mod;
+import org.kakara.core.common.mod.game.GameMod;
 import org.kakara.core.common.mod.game.ModCommand;
 import org.kakara.core.common.player.Player;
 import org.kakara.core.server.ServerGameInstance;
@@ -20,10 +21,10 @@ import java.util.Collections;
 import java.util.Optional;
 
 public class GiveCommand extends ModCommand {
-    private ServerGameInstance gameInstance;
-    public GiveCommand(Mod mod){
+    private final ServerGameInstance gameInstance;
+    public GiveCommand(GameMod mod){
         super(Collections.singleton("item"), "Give yourself an item.", mod, "give");
-        KValidate.checkServer();
+        KValidate.environmentCheckServer();
         this.gameInstance = (ServerGameInstance) Kakara.getGameInstance();
     }
 
@@ -37,7 +38,7 @@ public class GiveCommand extends ModCommand {
         if(strings.length == 1){
             Item item;
             try{
-                item =  gameInstance.getItemManager().getItem(new ControllerKey(strings[0].toUpperCase()));
+                item =  gameInstance.getItemRegistry().getItem(new ControllerKey(strings[0].toUpperCase()));
             }catch(IllegalArgumentException ex){
                 commandSender.sendMessage(ColorUtil.RED + "Invalid item! (Be sure you formatted the item name as 'mod:item'!)");
                 return;
@@ -52,7 +53,7 @@ public class GiveCommand extends ModCommand {
         }else if(strings.length == 2){
             Item item;
             try{
-                item =  gameInstance.getItemManager().getItem(new ControllerKey(strings[0].toUpperCase()));
+                item =  gameInstance.getItemRegistry().getItem(new ControllerKey(strings[0].toUpperCase()));
             }catch(IllegalArgumentException ex){
                 commandSender.sendMessage(ColorUtil.RED + "Invalid item! (Be sure you formatted the item name as 'mod:item'!)");
                 return;

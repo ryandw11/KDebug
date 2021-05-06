@@ -6,6 +6,7 @@ import org.kakara.core.common.Kakara;
 import org.kakara.core.common.command.Command;
 import org.kakara.core.common.command.CommandSender;
 import org.kakara.core.common.mod.Mod;
+import org.kakara.core.common.mod.game.GameMod;
 import org.kakara.core.common.mod.game.ModCommand;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class HelpCommand extends ModCommand {
-    public HelpCommand(Mod mod){
+    public HelpCommand(GameMod mod){
         super(Collections.singleton("h3lp"), "Ask for help.", mod, "help");
     }
 

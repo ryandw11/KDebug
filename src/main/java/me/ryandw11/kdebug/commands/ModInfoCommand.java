@@ -4,6 +4,7 @@ import me.ryandw11.kdebug.ColorUtil;
 import org.kakara.core.common.Kakara;
 import org.kakara.core.common.command.CommandSender;
 import org.kakara.core.common.mod.Mod;
+import org.kakara.core.common.mod.game.GameMod;
 import org.kakara.core.common.mod.game.ModCommand;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ModInfoCommand extends ModCommand {
-    public ModInfoCommand(Mod mod){
+    public ModInfoCommand(GameMod mod){
         super(Collections.singleton("mod"), "View more information about a mod.", mod, "modinfo");
     }
 
