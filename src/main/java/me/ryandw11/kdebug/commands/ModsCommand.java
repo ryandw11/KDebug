@@ -1,10 +1,11 @@
 package me.ryandw11.kdebug.commands;
 
 import me.ryandw11.kdebug.ColorUtil;
-import org.kakara.core.Kakara;
-import org.kakara.core.command.Command;
-import org.kakara.core.command.CommandSender;
-import org.kakara.core.mod.Mod;
+import org.kakara.core.common.Kakara;
+import org.kakara.core.common.command.CommandSender;
+import org.kakara.core.common.mod.Mod;
+import org.kakara.core.common.mod.game.ModCommand;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ModsCommand extends org.kakara.core.mod.game.ModCommand {
+public class ModsCommand extends ModCommand {
     public ModsCommand(Mod mod){
         super(Collections.singleton("modlist"), "List the mods installed.", mod, "mods");
     }
@@ -20,7 +21,7 @@ public class ModsCommand extends org.kakara.core.mod.game.ModCommand {
     @Override
     public void execute(String s, String[] strings, String s1, CommandSender commandSender) {
         int page = 0;
-        List<Mod> commandList = new ArrayList<>(Kakara.getModManager().getLoadedMods()).stream()
+        List<Mod> commandList = new ArrayList<>(Kakara.getGameInstance().getModManager().getLoadedMods()).stream()
                 .sorted(Comparator.comparing(Mod::getName)).collect(Collectors.toList());
         if(strings.length == 1){
             try{
@@ -41,7 +42,7 @@ public class ModsCommand extends org.kakara.core.mod.game.ModCommand {
         }
 
         commandSender.sendMessage("=========[MOD LIST #" + (page + 1) + "]==========");
-        int numOfCmds = Kakara.getModManager().getLoadedMods().size();
+        int numOfCmds = Kakara.getGameInstance().getModManager().getLoadedMods().size();
         for(int i = page * 5; i < (page * 5) + 5; i++){
             if(i >= numOfCmds) break;
             Mod mod = commandList.get(i);

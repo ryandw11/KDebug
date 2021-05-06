@@ -1,9 +1,10 @@
 package me.ryandw11.kdebug.commands;
 
 import me.ryandw11.kdebug.ColorUtil;
-import org.kakara.core.Kakara;
-import org.kakara.core.command.CommandSender;
-import org.kakara.core.mod.Mod;
+import org.kakara.core.common.Kakara;
+import org.kakara.core.common.command.CommandSender;
+import org.kakara.core.common.mod.Mod;
+import org.kakara.core.common.mod.game.ModCommand;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ModInfoCommand extends org.kakara.core.mod.game.ModCommand {
+public class ModInfoCommand extends ModCommand {
     public ModInfoCommand(Mod mod){
         super(Collections.singleton("mod"), "View more information about a mod.", mod, "modinfo");
     }
@@ -19,7 +20,7 @@ public class ModInfoCommand extends org.kakara.core.mod.game.ModCommand {
     @Override
     public void execute(String s, String[] strings, String s1, CommandSender commandSender) {
         if(strings.length == 1){
-            List<Mod> mods = Kakara.getModManager().getLoadedMods().stream().filter(m -> m.getName()
+            List<Mod> mods = Kakara.getGameInstance().getModManager().getLoadedMods().stream().filter(m -> m.getName()
                     .equalsIgnoreCase(strings[0])).collect(Collectors.toList());
             if(mods.size() < 1){
                 commandSender.sendMessage(ColorUtil.RED + "Error: Mod not found!");
